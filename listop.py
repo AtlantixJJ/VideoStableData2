@@ -97,10 +97,16 @@ def get_full_compare_list(dirs, styles):
     rng.shuffle(l)
     return l
 
-def build_list(dirs, styles):
+def build_list(dirs, styles, independent=False):
     print("=> build %s" % ",".join(dirs))
     print("=> style %s" % ",".join(styles))
-    write_list(dirs, get_full_compare_list(dirs, styles))
+    if independent:
+        n = len(dirs)
+        for i in range(n):
+            for j in range(i + 1, n):
+                write_list([dirs[i], dirs[j]], get_compare_list(dirs[i], dirs[j], styles))
+    else:
+        write_list(dirs, get_full_compare_list(dirs, styles))
 
 if __name__ == "__main__":
     styles = ["starrynight", "lamuse", "feathers", "composition"]

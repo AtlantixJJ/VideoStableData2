@@ -1,4 +1,5 @@
 import listop
+import os
 types = ["video", "frame"]
 
 # sfn flow v.s. diff, diff v.s. none, flow v.s. none
@@ -7,7 +8,7 @@ losses = ["flow", "diff", "none"]
 styles = ["starrynight", "lamuse", "feathers", "composition"]
 for t in types:
   dirs = [f"{t}_{model}_{loss}" for loss in losses]
-  listop.build_list(dirs, styles)
+  listop.build_list(dirs, styles, True)
 
 # sfn comb v.s. pixel
 model = "sfn"
@@ -37,4 +38,5 @@ losses = ["flow", "comb", "none"]
 styles = ["starrynight", "lamuse", "feathers", "composition"]
 for t in types:
   dirs = [f"{t}_{model}_{loss}" for loss in losses]
-  listop.build_list(dirs, styles) 
+  listop.build_list(dirs, styles, True)
+os.system("rm expr/*rnn_flow_none*") 
